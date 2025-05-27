@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adim | Premium Tees</title>
+  <style>
+    :root {
+      --navy: #0A1F44;
+      --cream: #FDF6EC;
+      --charcoal: #1E1E1E;
+      --gold: #C5A059;
+      --beige: #EADBC8;
+    }/* Global */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;font-family: 'Helvetica Neue', Arial, sans-serif;}
+body{background:var(--cream);color:var(--charcoal);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+/* Header */
+header{background:var(--navy);color:var(--cream);padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;}
+header h1{font-size:1.5rem;font-weight:700;letter-spacing:1px;}
+nav ul{display:flex;gap:1rem;list-style:none;}
+nav li{font-size:0.95rem;}
+
+/* Hero */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;padding:3.5rem 1rem;background:var(--beige);}
+.hero h2{font-size:2rem;font-weight:700;}
+.hero p{max-width:600px;font-size:1rem;}
+.btn-primary{background:var(--gold);color:var(--cream);padding:0.8rem 1.6rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:transform 0.2s ease;}
+.btn-primary:hover{transform:scale(1.05);}    
+
+/* Products */
+.products{padding:2.5rem 1rem;display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:1000px;margin:0 auto;}
+.card{background:var(--cream);border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.05);overflow:hidden;display:flex;flex-direction:column;}
+.card img{width:100%;height:260px;object-fit:cover;}
+.card-content{padding:1rem;display:flex;flex-direction:column;gap:0.5rem;flex-grow:1;}
+.card-content h3{font-size:1.1rem;}
+.price{font-weight:700;color:var(--navy);}    
+
+/* Dice Game */
+.dice-section{background:var(--navy);color:var(--cream);padding:3rem 1rem;text-align:center;display:flex;flex-direction:column;gap:1.4rem;}
+.dice-display{font-size:3rem;display:flex;justify-content:center;gap:1rem;}
+.discount-msg{font-size:1.2rem;font-weight:600;}
+
+/* Footer */
+footer{background:var(--charcoal);color:var(--cream);padding:1.2rem;text-align:center;font-size:0.9rem;}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Adim</h1>
+    <nav>
+      <ul>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#dice">Get Discount</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>  <!-- Hero -->  <section class="hero">
+    <h2>Elevate Your Everyday Style</h2>
+    <p>Discover premium, minimal T‑shirts crafted for comfort and class. Designed in Bangladesh, made for the world.</p>
+    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+  </section>  <!-- Products -->  <section id="products" class="products">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=800&q=60" alt="Classic Navy Tee" />
+      <div class="card-content">
+        <h3>Classic Navy Tee</h3>
+        <p>Timeless navy with a tailored fit.</p>
+        <span class="price">৳ 550</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60" alt="Cream Luxe Tee" />
+      <div class="card-content">
+        <h3>Cream Luxe Tee</h3>
+        <p>Soft cream fabric for an elevated look.</p>
+        <span class="price">৳ 530</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1600185365523-f3dbb0a71d6a?auto=format&fit=crop&w=800&q=60" alt="Charcoal Signature Tee" />
+      <div class="card-content">
+        <h3>Charcoal Signature Tee</h3>
+        <p>Bold charcoal, perfect for any occasion.</p>
+        <span class="price">৳ 560</span>
+      </div>
+    </div>
+  </section>  <!-- Dice Discount Game -->  <section id="dice" class="dice-section">
+    <h2>Roll &amp; Save!</h2>
+    <p>Roll the dice and get up to <strong>12% OFF</strong> on your order.</p>
+    <div class="dice-display">
+      <span id="die1">🎲</span>
+      <span id="die2">🎲</span>
+    </div>
+    <button class="btn-primary" onclick="rollDice()">Roll the Dice</button>
+    <p id="discount" class="discount-msg"></p>
+  </section>  <!-- Footer -->  <footer id="contact">
+    © <span id="year"></span> Adim. All rights reserved.
+  </footer>  <script>
+    // Update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dice rolling logic
+    function rollDice() {
+      const diceChars = ['','\u2680','\u2681','\u2682','\u2683','\u2684','\u2685'];
+      const die1 = Math.floor(Math.random() * 6) + 1;
+      const die2 = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('die1').textContent = String.fromCodePoint(`0x268${die1 - 1}`);
+      document.getElementById('die2').textContent = String.fromCodePoint(`0x268${die2 - 1}`);
+      const total = die1 + die2;
+      const discountMsg = `You got <strong>${total}% OFF</strong>! Use code <kbd>ADIM${total}</kbd> at checkout.`;
+      document.getElementById('discount').innerHTML = discountMsg;
+    }
+  </script></body>
+</html>
